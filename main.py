@@ -5,7 +5,7 @@ import time
 from qiskit import IBMQ
 import os
 
-IBM_TOKEN = os.environ["ibm_token"]
+IBM_TOKEN = os.environ["IBM_TOKEN"]
 
 IBMQ.save_account(IBM_TOKEN)
 IBMQ.load_account()

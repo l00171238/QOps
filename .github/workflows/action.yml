@@ -4,10 +4,8 @@ on:
     branches:
       - main
 
-
 env:
-  ibm_token: ${{ secerts.IBM_TOKEN }}
-
+  IBM_TOKEN: ${{ secrets.IBM_TOKEN }}
 jobs:
   run:
     runs-on: ubuntu-latest
