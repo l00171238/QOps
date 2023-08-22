@@ -4,6 +4,11 @@ from qiskit.visualization import plot_histogram
 from math import gcd
 from qiskit.visualization import circuit_drawer
 import time
+from qiskit import IBMQ
+import secrets
+
+IBMQ.save_account(secrets["IBM_token"])
+IBMQ.load_account()
 
 # Define the quantum part of Shor's algorithm
 def qpe_amod15(a):
@@ -30,7 +35,7 @@ def qpe_amod15(a):
 
 
     t_qc = transpile(qc, aer_sim)
-    qobj = assemble(t_qc, shots=1)
+    qobj = assemble(t_qc, shots=1024)
     result = aer_sim.run(qobj, memory=True).result()
     readings = result.get_memory()
     print("Register Reading: " + readings[0])
@@ -44,6 +49,9 @@ def qpe_amod15(a):
     # Return the number of times the reading is '0000'
     print("Shor's algorithm guess: " + str(int(readings[0], 2)))
     return int(readings[0], 2)
+
+provider = IBMQ.get_provider('ibm-q')
+backend = provider.get_backend('ibmq_qasm_simulator')  # Choose a backend
 
 # Define the Quantum Fourier Transform
 def qft_dagger(n):
@@ -103,4 +111,6 @@ while not factor_found:
         print("No guesses found, trying a different 'a'")
         a = np.random.randint(2, N)
 
-    qpe_amod15(a)
+print("Quantum Circuit:")
+circuit = qpe_amod15(a)  # Use the original qpe_amod15(a) function
+

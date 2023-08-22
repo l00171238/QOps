@@ -1,0 +1,24 @@
+name: Quantum Algorithm
+on: pull_request
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt;
+          fi
+
+      - name: Run main.py
+        run: |
+          python main.py
