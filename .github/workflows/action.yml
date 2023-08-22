@@ -7,7 +7,7 @@ on:
 env:
   IBM_TOKEN: ${{ secrets.IBM_TOKEN }}
 jobs:
-  run:
+  run-quantum-algorithm:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
