@@ -4,6 +4,9 @@ on:
     branches:
       - main
 
+
+env:
+  ibm_token: ${{ IBM_TOKEN }}
 jobs:
   run:
     runs-on: ubuntu-latest

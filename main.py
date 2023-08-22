@@ -1,13 +1,13 @@
 import numpy as np
 from qiskit import QuantumCircuit, transpile, assemble, Aer, execute
-from qiskit.visualization import plot_histogram
 from math import gcd
-from qiskit.visualization import circuit_drawer
 import time
 from qiskit import IBMQ
-import secrets
+import os
 
-IBMQ.save_account(secrets["IBM_token"])
+IBM_TOKEN = os.environ["ibm_token"]
+
+IBMQ.save_account(IBM_TOKEN)
 IBMQ.load_account()
 
 # Define the quantum part of Shor's algorithm
