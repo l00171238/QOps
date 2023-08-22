@@ -6,7 +6,8 @@ on:
 
 
 env:
-  ibm_token: ${{ IBM_TOKEN }}
+  ibm_token: ${{ secerts.IBM_TOKEN }}
+
 jobs:
   run:
     runs-on: ubuntu-latest
