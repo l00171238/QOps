@@ -2,6 +2,7 @@ import numpy as np
 from qiskit import QuantumCircuit, transpile, assemble, Aer, execute
 from math import gcd
 import time
+from qiskit.visualization import plot_histogram
 from qiskit import IBMQ
 import os
 
@@ -35,7 +36,7 @@ def qpe_amod15(a):
 
 
     t_qc = transpile(qc, aer_sim)
-    qobj = assemble(t_qc, shots=1024)
+    qobj = assemble(t_qc, shots=1)
     result = aer_sim.run(qobj, memory=True).result()
     readings = result.get_memory()
     print("Register Reading: " + readings[0])
@@ -50,8 +51,16 @@ def qpe_amod15(a):
     print("Shor's algorithm guess: " + str(int(readings[0], 2)))
     return int(readings[0], 2)
 
+    # Get the measurement results
+    results = qpe_amod15(a).result()
+
+    # Plot the histogram
+    plot_histogram(results.get_counts())
+
+
 provider = IBMQ.get_provider('ibm-q')
 backend = provider.get_backend('ibmq_qasm_simulator')  # Choose a backend
+
 
 # Define the Quantum Fourier Transform
 def qft_dagger(n):
