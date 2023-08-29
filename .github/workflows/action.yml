@@ -31,7 +31,7 @@ jobs:
       - name: Install Datadog Agent
         run: |
           DD_API_KEY=${{ secrets.DATADOG_API_KEY }}
-          DD_SITE="datadoghq.com"
+          DD_SITE="datadoghq.eu"
           DD_TAGS="environment:production,service:quantum"
           bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 
