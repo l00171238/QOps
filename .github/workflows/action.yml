@@ -38,4 +38,4 @@ jobs:
           PAPERTRAIL_PORT: ${{ secrets.PAPERTRAIL_PORT }}
         run: |
           echo "Sending Shor's algorithm logs to Papertrail..."
-          remote_syslog -h ${PAPERTRAIL_HOST} -p ${PAPERTRAIL_PORT} /tmp/shor_algorithm_logs.txt
+          remote_syslog -h ${PAPERTRAIL_HOST} -p ${PAPERTRAIL_PORT} /tmp/shor_algorithm_log.txt
