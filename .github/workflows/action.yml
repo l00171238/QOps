@@ -35,4 +35,4 @@ jobs:
       - name: Send Logs to Papertrail
         run: |
           echo "Sending logs to Papertrail..."
-          remote_syslog -t ${{ secrets.PAPERTRAIL_API_KEY }} /tmp/shor_algorithm_logs.txt
+          remote_syslog -p ${{ secrets.PAPERTRAIL_HOST_PORT }} /tmp/shor_algorithm_logs.txt
