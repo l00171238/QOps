@@ -22,6 +22,10 @@ jobs:
             pip install -r requirements.txt;
           fi
 
-      - name: Run main.py
+      - name: Run Shor_algorithm.py
         run: |
-          python main.py
+          python Shor_algorithm.py
+
+      - name: Run Test-shors
+        run: |
+          python Test-shors.py
