@@ -28,4 +28,4 @@ jobs:
 
       - name: Run Test-shors
         run: |
-          python Test-shors.py
+          python Test_shors.py
