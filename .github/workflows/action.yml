@@ -39,4 +39,4 @@ jobs:
           PAPERTRAIL_API_KEY: ${{ secrets.PAPERTRAIL_API_KEY }}
         run: |
           echo "Sending Shor's algorithm logs to Papertrail..."
-          remote_syslog -h ${PAPERTRAIL_HOST} -p ${PAPERTRAIL_PORT} --tls -k  ${PAPERTRAIL_API_KEY} -n Manav -f /tmp/shor_algorithm_log.txt
+          remote_syslog -h ${PAPERTRAIL_HOST} -p ${PAPERTRAIL_PORT} --tls  -n Manav -f /tmp/shor_algorithm_log.txt
