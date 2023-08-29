@@ -6,9 +6,9 @@ from qiskit.visualization import plot_histogram
 from qiskit import IBMQ
 import os
 
-IBM_TOKEN = os.environ["IBM_TOKEN"]
+#IBM_TOKEN = os.environ["IBM_TOKEN"]
 
-IBMQ.save_account(IBM_TOKEN)
+IBMQ.save_account('a74592bbfbc9b353a94f088dbfe8fedae49bf4ffea03b711071176d0832c61134a3a84acc1af00abefa8a718ca119aa1109ce481b6f2eaeab54ed3c87ff3df5f')
 IBMQ.load_account()
 
 # Define the quantum part of Shor's algorithm
@@ -91,8 +91,8 @@ def c_amod15(a, power):
 
 
 # Now, let's run the algorithm
-N = 15  # The number to be factored
-a = 7  # The "a" in a^x mod N
+N = 100  # The number to be factored
+a =11  # The "a" in a^x mod N
 factor_found = False
 
 print("Running Shor's algorithm for N =", N)
@@ -119,6 +119,25 @@ while not factor_found:
     else:
         print("No guesses found, trying a different 'a'")
         a = np.random.randint(2, N)
+
+def test_correct_factoring():
+    """
+    Test that the Shor's algorithm can correctly factor the input number.
+    """
+
+    # Generate a random input number
+    N = np.random.randint(100, 1000)
+
+    # Find the factors of N
+    factors = list(factors(N))
+
+    # Run Shor's algorithm on N
+    measured = qpe_amod15(a)
+
+    # Check that the measured value is one of the factors of N
+    assert measured in factors
+
+
 
 print("Quantum Circuit:")
 circuit = qpe_amod15(a)  # Use the original qpe_amod15(a) function

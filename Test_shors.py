@@ -25,7 +25,7 @@ def shor(N):
 
   # Run the circuit on the quantum simulator
   backend = qiskit.Aer.get_backend('aer_simulator')
-  result = qiskit.execute(circuit, backend, shots=1024)
+  result = qiskit.execute(circuit, backend, shots=2000)
 
   # Get the results
   counts = result.get_counts()
