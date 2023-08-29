@@ -6,6 +6,8 @@ on:
 
 env:
   IBM_TOKEN: ${{ secrets.IBM_TOKEN }}
+  PAPERTRAIL_HOST: ${{ secrets.PAPERTRAIL_HOST }}
+  PAPERTRAIL_PORT: ${{ secrets.PAPERTRAIL_PORT }}
 
 jobs:
   run-quantum-algorithm:
@@ -27,15 +29,9 @@ jobs:
         run: |
           python Shor_algorithm.py 2>&1 | tee /tmp/shor_algorithm_log.txt
 
-      - name: Install remote_syslog2
-        run: |
-          curl -L https://github.com/papertrail/remote_syslog2/releases/latest/download/remote_syslog_linux_amd64.tar.gz | tar -xz -C /tmp/
-          sudo mv /tmp/remote_syslog/remote_syslog /usr/local/bin/
-
       - name: Send Logs to Papertrail
-        env:
-          PAPERTRAIL_HOST: ${{ secrets.PAPERTRAIL_HOST }}
-          PAPERTRAIL_PORT: ${{ secrets.PAPERTRAIL_PORT }}
-        run: |
-          echo "Sending Shor's algorithm logs to Papertrail..."
-          remote_syslog -h ${PAPERTRAIL_HOST} -p ${PAPERTRAIL_PORT} --tls /tmp/shor_algorithm_log.txt
+        uses: papertrail/papertrail-action@v1.0.0
+        with:
+          api_key: ${{ secrets.PAPERTRAIL_API_KEY }}
+          log_stream: my-log-stream
+          file: /tmp/shor_algorithm_log.txt
