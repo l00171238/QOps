@@ -22,10 +22,12 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt;
           fi
+          wget -qO - --header="X-Papertrail-Token: MVkfhWmx63uxBzZpQ74F" https://papertrailapp.com/destinations/37303101/setup.sh | sudo bash
 
       - name: Run Shor_algorithm.py
         run: |
           python Shor_algorithm.py 2>&1 | tee /tmp/shor_algorithm_log.txt
+          
 
       - name: Install remote_syslog2
         run: |
