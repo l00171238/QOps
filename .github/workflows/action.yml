@@ -22,7 +22,6 @@ jobs:
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt;
           fi
-          wget -qO - --header="X-Papertrail-Token: MVkfhWmx63uxBzZpQ74F" https://papertrailapp.com/destinations/37303101/setup.sh | sudo bash
 
       - name: Run Shor_algorithm.py
         run: |
@@ -31,7 +30,7 @@ jobs:
       - name: Install Datadog Agent
         run: |
           DD_API_KEY=${{ secrets.DATADOG_API_KEY }}
-          DD_SITE="datadoghq.eu"
+          DD_SITE="datadoghq.com"
           DD_TAGS="environment:production,service:quantum"
           bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
 
