@@ -6,7 +6,6 @@ on:
 
 env:
   IBM_TOKEN: ${{ secrets.IBM_TOKEN }}
-  PAPERTRAIL_API_KEY: ${{ secrets.PAPERTRAIL_API_KEY }}
 
 jobs:
   run-quantum-algorithm:
@@ -16,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v2
 
       - name: Install dependencies
         run: |
@@ -28,8 +27,13 @@ jobs:
         run: |
           python Shor_algorithm.py
 
-      - name: Send logs to Papertrail
-        uses: papertrail/papertrail-step@v1.0.0
-        with:
-          api_key: ${{ secrets.PAPERTRAIL_API_KEY }}
-          log_stream: my-log-stream
+      - name: Install remote_syslog2
+        run: |
+          wget -O /tmp/remote_syslog2.tar.gz https://github.com/papertrail/remote_syslog2/releases/download/v0.24/remote_syslog_linux_amd64.tar.gz
+          tar -xzvf /tmp/remote_syslog2.tar.gz -C /tmp/
+          sudo mv /tmp/remote_syslog/remote_syslog /usr/local/bin/
+
+      - name: Send Logs to Papertrail
+        run: |
+          echo "Sending logs to Papertrail..."
+          remote_syslog -p ${{ secrets.PAPERTRAIL_API_KEY }} /var/log/syslog

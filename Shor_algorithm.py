@@ -6,9 +6,9 @@ from qiskit.visualization import plot_histogram
 from qiskit import IBMQ
 import os
 
-#IBM_TOKEN = os.environ["IBM_TOKEN"]
+IBM_TOKEN = os.environ["IBM_TOKEN"]
 
-IBMQ.save_account('a74592bbfbc9b353a94f088dbfe8fedae49bf4ffea03b711071176d0832c61134a3a84acc1af00abefa8a718ca119aa1109ce481b6f2eaeab54ed3c87ff3df5f')
+IBMQ.save_account(IBM_TOKEN)
 IBMQ.load_account()
 
 # Define the quantum part of Shor's algorithm
