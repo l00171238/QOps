@@ -25,15 +25,14 @@ jobs:
 
       - name: Run Shor_algorithm.py
         run: |
-          python Shor_algorithm.py
+          python Shor_algorithm.py 2>&1 | tee /tmp/shor_algorithm_log.txt
 
       - name: Install remote_syslog2
         run: |
-          wget -O /tmp/remote_syslog2.tar.gz https://github.com/papertrail/remote_syslog2/releases/download/v0.24/remote_syslog_linux_amd64.tar.gz
-          tar -xzvf /tmp/remote_syslog2.tar.gz -C /tmp/
+          curl -L https://github.com/papertrail/remote_syslog2/releases/latest/download/remote_syslog_linux_amd64.tar.gz | tar -xz -C /tmp/
           sudo mv /tmp/remote_syslog/remote_syslog /usr/local/bin/
 
       - name: Send Logs to Papertrail
         run: |
           echo "Sending logs to Papertrail..."
-          remote_syslog -p ${{ secrets.PAPERTRAIL_API_KEY }} /var/log/syslog
+          remote_syslog -p ${{ secrets.PAPERTRAIL_API_KEY }} /tmp/shor_algorithm_logs.txt
