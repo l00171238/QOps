@@ -33,6 +33,9 @@ jobs:
           sudo mv /tmp/remote_syslog/remote_syslog /usr/local/bin/
 
       - name: Send Logs to Papertrail
+        env:
+          PAPERTRAIL_HOST: ${{ secrets.PAPERTRAIL_HOST }}
+          PAPERTRAIL_PORT: ${{ secrets.PAPERTRAIL_PORT }}
         run: |
-          echo "Sending logs to Papertrail..."
-          remote_syslog -p ${{ secrets.PAPERTRAIL_HOST_PORT }} /tmp/shor_algorithm_logs.txt
+          echo "Sending Shor's algorithm logs to Papertrail..."
+          remote_syslog -p ${PAPERTRAIL_HOST}:${PAPERTRAIL_PORT} /tmp/shor_algorithm_logs.txt
