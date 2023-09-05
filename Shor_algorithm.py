@@ -92,7 +92,7 @@ def c_amod15(a, power):
 
 # Now, let's run the algorithm
 N = 100  # The number to be factored
-a =11  # The "a" in a^x mod N
+a =1 # The "a" in a^x mod N
 factor_found = False
 
 print("Running Shor's algorithm for N =", N)
